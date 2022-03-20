@@ -10,7 +10,6 @@ function GameWindow({ level }) {
     const { addEasyScoreHandler, addHardScoreHandler } =
         useContext(LeadersContext)
     const params = useParams()
-    console.log(params.name)
     const [colors, setColors] = useState([
         'green',
         'rgb(192, 179, 0)',
@@ -52,13 +51,13 @@ function GameWindow({ level }) {
         if (difficulty) {
             const wordSelector = Math.floor(Math.random() * 527 + 1)
             const answer = commonWords[wordSelector]
-            setAnswer('spell')
-            console.log(answer)
+            setAnswer(answer)
+            //console.log(answer)
         } else {
             const wordSelector = Math.floor(Math.random() * 12653 + 1)
             const answer = words[wordSelector]
             setAnswer(answer)
-            console.log(answer)
+            //console.log(answer)
         }
     }
 
@@ -99,6 +98,9 @@ function GameWindow({ level }) {
                 break
         }
     }
+    function checkIfDuplicateExists(arr) {
+        return new Set(arr).size !== arr.length
+    }
 
     const checkIndex = (guessArr) => {
         const answerArr = Array.from(answer) // match each index to each of guess arr
@@ -120,9 +122,7 @@ function GameWindow({ level }) {
                 if (yellowTracker.includes(guessLowerCase[i])) {
                     const rmYellow = yellowTracker.indexOf(guessLowerCase[i])
                     arr[rmYellow] = 'rgb(56, 56, 56)'
-                    function checkIfDuplicateExists(arr) {
-                        return new Set(arr).size !== arr.length
-                    }
+
                     if (checkIfDuplicateExists(answerArr)) {
                         arr[rmYellow] = 'rgb(192, 179, 0)'
                     }
