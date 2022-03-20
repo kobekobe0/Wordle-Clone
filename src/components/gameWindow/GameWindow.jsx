@@ -52,7 +52,7 @@ function GameWindow({ level }) {
         if (difficulty) {
             const wordSelector = Math.floor(Math.random() * 527 + 1)
             const answer = commonWords[wordSelector]
-            setAnswer(answer.toLowerCase())
+            setAnswer('spell')
             console.log(answer)
         } else {
             const wordSelector = Math.floor(Math.random() * 12653 + 1)
@@ -108,18 +108,36 @@ function GameWindow({ level }) {
         let yellow = []
         let gray = []
         let multipleTracker = []
+        let yellowTracker = [] //traces if there was a same letter that is yellowed before a green
 
         for (let i = 0; i < 5; i++) {
             if (guessLowerCase[i] === answerArr[i]) {
+                for (let j = 0; j < 5; j++) {
+                    if (guessLowerCase[i] === answerArr[j]) {
+                        multipleTracker.push(guessLowerCase[i])
+                    }
+                }
+                if (yellowTracker.includes(guessLowerCase[i])) {
+                    const rmYellow = yellowTracker.indexOf(guessLowerCase[i])
+                    arr[rmYellow] = 'rgb(56, 56, 56)'
+                    function checkIfDuplicateExists(arr) {
+                        return new Set(arr).size !== arr.length
+                    }
+                    if (checkIfDuplicateExists(answerArr)) {
+                        arr[rmYellow] = 'rgb(192, 179, 0)'
+                    }
+                }
                 arr.push(colors[0])
-                multipleTracker.push(guessLowerCase[i])
+                //multipleTracker.push(guessLowerCase[i])
                 !greenLetters.includes(answerArr[i]) && green.push(answerArr[i]) // make background green
             } else if (answerArr.includes(guessLowerCase[i])) {
-                !multipleTracker.includes(guessLowerCase[i]) // if letter is in the array only once, make background yellow
-                    ? arr.push(colors[1]) &&
-                      multipleTracker.push(guessLowerCase[i])
-                    : arr.push(colors[2])
-
+                if (!multipleTracker.includes(guessLowerCase[i])) {
+                    arr.push(colors[1])
+                    multipleTracker.push(guessLowerCase[i])
+                    yellowTracker.push(guessLowerCase[i])
+                } else {
+                    arr.push(colors[2])
+                }
                 !yellowLetters.includes(answerArr[i]) &&
                     yellow.push(guessLowerCase[i])
             } else {
