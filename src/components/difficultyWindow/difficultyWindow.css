@@ -23,7 +23,7 @@
 }
 .difficulty .difficulty_element {
     width: 300px;
-    background-color: rgb(176, 255, 255);
+    background-color: rgb(41, 255, 255);
     margin-bottom: 1em;
     padding: 1em;
     font-weight: bolder;
@@ -31,7 +31,7 @@
     border-radius: 10px;
 }
 .difficulty .difficulty_element:nth-child(2) {
-    background-color: lightcoral;
+    background-color: rgb(255, 52, 52);
     color: rgb(0, 0, 0);
 }
 
