@@ -1,0 +1,57 @@
+.modal_container {
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.822);
+    border-radius: 15px;
+    color: white;
+    padding: 0.8em;
+}
+
+.modal_header button {
+    background-color: transparent;
+    border: none;
+    padding-top: 1em;
+    padding-right: 1em;
+    color: red;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.modal_body h2 {
+    font-size: 3em;
+    text-align: center;
+    margin: 0;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.modal_footer h3 {
+    font-size: 1em;
+    text-align: center;
+    margin: 0;
+    padding: 2em;
+    font-weight: lighter;
+    cursor: pointer;
+}
+.modal_container h1 {
+    font-size: 1.5em;
+}
+.modal_container a {
+    color: white;
+    padding-bottom: 0.5em;
+    text-decoration: none;
+}
+@media only screen and (max-width: 1024px) {
+    .keyboard_container > * > * {
+        width: 8vw;
+        height: 8vw;
+        font-size: 1em;
+    }
+    .keyboard_container > * > * > * {
+        margin: 0;
+        align-self: center;
+    }
+}

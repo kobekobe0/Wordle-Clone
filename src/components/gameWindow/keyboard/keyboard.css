@@ -1,0 +1,49 @@
+.keyboard_container {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    padding-bottom: 3em;
+    grid-template-areas:
+        'firstRowKey firstRowKey firstRowKey firstRowKey firstRowKey firstRowKey firstRowKey firstRowKey firstRowKey firstRowKey'
+        'secondRowKey secondRowKey secondRowKey secondRowKey secondRowKey secondRowKey secondRowKey secondRowKey secondRowKey secondRowKey'
+        'thirdRowKey thirdRowKey thirdRowKey thirdRowKey thirdRowKey thirdRowKey thirdRowKey thirdRowKey thirdRowKey thirdRowKey';
+}
+
+.keyboard_container > * > * {
+    font-size: 1.5em;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 1px;
+    font-weight: bolder;
+    color: white;
+    background-color: rgb(119, 119, 119);
+}
+
+.firstRowKey {
+    grid-area: firstRowKey;
+}
+
+.secondRowKey {
+    grid-area: secondRowKey;
+}
+
+.thirdRowKey {
+    grid-area: thirdRowKey;
+}
+
+@media only screen and (max-width: 1024px) {
+    .keyboard_container > * > * {
+        width: 8vw;
+        height: 8vw;
+        font-size: 1em;
+    }
+    .keyboard_container > * > * > * {
+        margin: 0;
+        align-self: center;
+    }
+}

@@ -1,0 +1,153 @@
+.guessContainer {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    height: 540px;
+}
+.guessContainer > * > * {
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgb(87, 87, 87);
+    color: rgb(53, 53, 53);
+}
+.guessContainer > * > * p {
+    font-size: 50px;
+    font-weight: bolder;
+    color: white;
+}
+.firstRow {
+    grid-area: 1 / 1 / 2 / 6;
+}
+.firstRow > * {
+    height: 90px;
+    width: 90px;
+}
+.firstRowElement {
+    grid-area: 1 / 1 / 2 / 2;
+}
+.firstRowElement2 {
+    grid-area: 1 / 2 / 2 / 3;
+}
+.firstRowElement3 {
+    grid-area: 1 / 3 / 2 / 4;
+}
+.firstRowElement4 {
+    grid-area: 1 / 4 / 2 / 5;
+}
+.firstRowElement5 {
+    grid-area: 1 / 5 / 2 / 6;
+}
+.secondRow {
+    grid-area: 2 / 1 / 3 / 6;
+}
+.secondRowElement {
+    grid-area: 2 / 1 / 3 / 2;
+}
+.secondRowElement2 {
+    grid-area: 2 / 2 / 3 / 3;
+}
+.secondRowElement3 {
+    grid-area: 2 / 3 / 3 / 4;
+}
+.secondRowElement4 {
+    grid-area: 2 / 4 / 3 / 5;
+}
+.secondRowElement5 {
+    grid-area: 2 / 5 / 3 / 6;
+}
+.thirdRow {
+    grid-area: 3 / 1 / 4 / 6;
+}
+.thirdRowElement {
+    grid-area: 3 / 1 / 4 / 2;
+}
+.thirdRowElement2 {
+    grid-area: 3 / 2 / 4 / 3;
+}
+.thirdRowElement3 {
+    grid-area: 3 / 3 / 4 / 4;
+}
+.thirdRowElement4 {
+    grid-area: 3 / 4 / 4 / 5;
+}
+.thirdRowElement5 {
+    grid-area: 3 / 5 / 4 / 6;
+}
+.fourthRow {
+    grid-area: 4 / 1 / 5 / 6;
+}
+.fourthRowElement {
+    grid-area: 4 / 1 / 5 / 2;
+}
+.fourthRowElement2 {
+    grid-area: 4 / 2 / 5 / 3;
+}
+.fourthRowElement3 {
+    grid-area: 4 / 3 / 5 / 4;
+}
+.fourthRowElement4 {
+    grid-area: 4 / 4 / 5 / 5;
+}
+.fourthRowElement5 {
+    grid-area: 4 / 5 / 5 / 6;
+}
+.fifthRow {
+    grid-area: 5 / 1 / 6 / 6;
+}
+.fifthRowElement {
+    grid-area: 5 / 1 / 6 / 2;
+}
+.fifthRowElement2 {
+    grid-area: 5 / 2 / 6 / 3;
+}
+.fifthRowElement3 {
+    grid-area: 5 / 3 / 6 / 4;
+}
+.fifthRowElement4 {
+    grid-area: 5 / 4 / 6 / 5;
+}
+.fifthRowElement5 {
+    grid-area: 5 / 5 / 6 / 6;
+}
+.sixthRow {
+    grid-area: 6 / 1 / 7 / 6;
+}
+.sixthRowElement {
+    grid-area: 6 / 1 / 7 / 2;
+}
+.sixthRowElement2 {
+    grid-area: 6 / 2 / 7 / 3;
+}
+.sixthRowElement3 {
+    grid-area: 6 / 3 / 7 / 4;
+}
+.sixthRowElement4 {
+    grid-area: 6 / 4 / 7 / 5;
+}
+.sixthRowElement5 {
+    grid-area: 6 / 5 / 7 / 6;
+}
+
+.scoreContainer {
+    margin: 0;
+    margin-bottom: 1em;
+    color: white;
+}
+@media only screen and (max-width: 1024px) {
+    .guessContainer {
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    .guessContainer > * > * {
+        height: 70px;
+        width: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
