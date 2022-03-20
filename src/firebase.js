@@ -1,15 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
-import {
-    collection,
-    getFirestore,
-    getDocs,
-    addDoc,
-    query,
-    orderBy,
-    onSnapshot,
-} from 'firebase/firestore'
-import { useEffect } from 'react'
+import { collection, getFirestore, addDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCzo6ucqnHICwEZi-AZcEotvc4H9C5TMIs',

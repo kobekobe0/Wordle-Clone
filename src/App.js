@@ -1,4 +1,3 @@
-import logo from './logo.svg'
 import './App.css'
 import GameWindow from './components/gameWindow/GameWindow'
 import DifficultyWindow from './components/difficultyWindow/DifficultyWindow'

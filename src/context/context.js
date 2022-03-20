@@ -1,11 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
-import {
-    colRef,
-    getEasy,
-    getHard,
-    addEasyScore,
-    addHardScore,
-} from '../firebase'
+import { addEasyScore, addHardScore } from '../firebase'
 
 export const LeadersContext = createContext()
 
@@ -14,15 +8,7 @@ export const LeadersProvider = ({ children }) => {
     const [hardLeaders, setHardLeaders] = useState([])
     const [playerName, setPlayerName] = useState('')
 
-    useEffect(() => {
-        let easy = []
-        let hard = []
-        easy = getEasy()
-        hard = getHard()
-
-        setEasyLeaders(easy)
-        setHardLeaders(hard)
-    }, [getEasy, getHard])
+    useEffect(() => {}, [])
 
     const addEasyScoreHandler = (name, score) => {
         addEasyScore(name, score)

@@ -1,21 +1,9 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './difficultyWindow.css'
-import { LeadersContext } from '../../context/context'
-import {
-    getEasy,
-    getHard,
-    addEasyScorem,
-    colRefEasy,
-    colRefHard,
-    db,
-} from '../../firebase'
-import { Modal } from '../modal/Modal'
+import { db } from '../../firebase'
 import {
     collection,
-    getFirestore,
-    getDocs,
-    addDoc,
     query,
     orderBy,
     onSnapshot,
@@ -23,13 +11,11 @@ import {
 } from 'firebase/firestore'
 
 function DifficultyWindow() {
-    const { easyLeaders, hardLeaders, setPlayerName } =
-        useContext(LeadersContext)
-    const [easy, setEasy] = React.useState([])
-    const [hard, setHard] = React.useState([])
-    const [disabler, setDisabler] = React.useState(false)
-    const [name, setName] = React.useState('')
-    const [urlName, setUrlName] = React.useState('')
+    const [easy, setEasy] = useState([])
+    const [hard, setHard] = useState([])
+    const [disabler, setDisabler] = useState(false)
+    const [name, setName] = useState('')
+    const [urlName, setUrlName] = useState('')
     const colRefEasy = collection(db, 'easy')
     const colRefHard = collection(db, 'hard')
 

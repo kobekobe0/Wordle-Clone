@@ -40,7 +40,6 @@ function GameWindow({ level }) {
     const [lose, setLose] = useState(false)
     const [short, setShort] = useState(false)
     const [notAWord, setNotAWord] = useState(false)
-    const [notice, setNotice] = useState(false)
     const [answer, setAnswer] = useState('')
     const [score, setScore] = useState(0)
     const [difficulty, setDifficulty] = useState(level) // true = easy, false = hard
@@ -96,6 +95,8 @@ function GameWindow({ level }) {
                     setSixthGuess([...sixthGuess, letter])
                 }
                 break
+            default:
+                break
         }
     }
 
@@ -145,6 +146,8 @@ function GameWindow({ level }) {
                 break
             case 'sixth':
                 setSixthRowColors(arr)
+                break
+            default:
                 break
         }
 
@@ -222,6 +225,8 @@ function GameWindow({ level }) {
                 } else {
                     setDisappearModal(setShort)
                 }
+                break
+            default:
                 break
         }
     }
