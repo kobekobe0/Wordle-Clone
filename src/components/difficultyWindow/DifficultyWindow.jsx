@@ -67,11 +67,19 @@ function DifficultyWindow() {
                 <div className="difficulty">
                     <Link
                         className="difficulty_element"
+                        style={{
+                            backgroundColor: 'rgb(41, 255, 255)',
+                            color: 'white',
+                        }}
                         to={`/easy/${urlName}`}
                     >
                         Easy 🍀
                     </Link>
                     <Link
+                        style={{
+                            backgroundColor: 'rgb(255, 52, 52)',
+                            color: 'orange',
+                        }}
                         className="difficulty_element"
                         to={`/hard/${urlName}`}
                     >
