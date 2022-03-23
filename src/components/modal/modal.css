@@ -3,9 +3,9 @@
     left: 50%;
     top: 10%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.822);
+    background-color: rgb(15, 15, 15);
     border-radius: 15px;
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 0.8em;
 }
 
