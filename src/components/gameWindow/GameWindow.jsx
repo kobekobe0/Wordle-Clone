@@ -59,7 +59,6 @@ function GameWindow({ level }) {
             const wordSelector = Math.floor(Math.random() * 527 + 1)
             const answer = commonWords[wordSelector]
             setAnswer('arise')
-            console.log(answer)
         } else {
             const wordSelector = Math.floor(Math.random() * 12653 + 1)
             const answer = words[wordSelector]
