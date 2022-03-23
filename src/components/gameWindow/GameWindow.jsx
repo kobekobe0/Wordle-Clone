@@ -57,12 +57,12 @@ function GameWindow({ level }) {
     const setWord = () => {
         if (difficulty) {
             const wordSelector = Math.floor(Math.random() * 527 + 1)
-            const answer = commonWords[wordSelector]
-            setAnswer('arise')
+            const answer = commonWords[wordSelector].toLowerCase()
+            setAnswer(answer)
         } else {
             const wordSelector = Math.floor(Math.random() * 12653 + 1)
             const answer = words[wordSelector]
-            setAnswer(answer.toLowerCase())
+            setAnswer(answer)
             //console.log(answer)
         }
     }
