@@ -4,7 +4,9 @@ import './GameWindow.css'
 import { words, commonWords } from '../../word'
 import Modal from '../modal/Modal'
 import { LeadersContext } from '../../context/context'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 function GameWindow({ level }) {
     const { addEasyScoreHandler, addHardScoreHandler } =
@@ -15,6 +17,7 @@ function GameWindow({ level }) {
         'rgb(192, 179, 0)',
         'rgb(56, 56, 56)',
     ])
+    const navigate = useNavigate()
     const [firstGuess, setFirstGuess] = useState([])
     const [secondGuess, setSecondGuess] = useState([])
     const [thirdGuess, setThirdGuess] = useState([])
@@ -30,10 +33,13 @@ function GameWindow({ level }) {
     const [sixthRowColors, setSixthRowColors] = useState([])
 
     const [rowPointer, setRowPointer] = useState('first')
+    const { width, height } = useWindowSize()
 
     const [greenLetters, setGreenLetters] = useState([])
     const [yellowLetters, setYellowLetters] = useState([])
     const [grayLetters, setGrayLetters] = useState([])
+
+    const [enterDisable, setEnterDisable] = useState(true)
 
     const [result, setResult] = useState(false)
     const [lose, setLose] = useState(false)
@@ -41,6 +47,7 @@ function GameWindow({ level }) {
     const [notAWord, setNotAWord] = useState(false)
     const [answer, setAnswer] = useState('')
     const [score, setScore] = useState(0)
+    const [showConfetti, setShowConfetti] = useState(false)
     const [difficulty, setDifficulty] = useState(level) // true = easy, false = hard
 
     useEffect(() => {
@@ -51,12 +58,12 @@ function GameWindow({ level }) {
         if (difficulty) {
             const wordSelector = Math.floor(Math.random() * 527 + 1)
             const answer = commonWords[wordSelector]
-            setAnswer(answer)
-            //console.log(answer)
+            setAnswer('arise')
+            console.log(answer)
         } else {
             const wordSelector = Math.floor(Math.random() * 12653 + 1)
             const answer = words[wordSelector]
-            setAnswer(answer)
+            setAnswer(answer.toLowerCase())
             //console.log(answer)
         }
     }
@@ -116,6 +123,7 @@ function GameWindow({ level }) {
             if (guessLowerCase[i] === answerArr[i]) {
                 for (let j = 0; j < 5; j++) {
                     if (guessLowerCase[i] === answerArr[j]) {
+                        //this is for keeping track of green letters
                         multipleTracker.push(guessLowerCase[i])
                     }
                 }
@@ -136,11 +144,22 @@ function GameWindow({ level }) {
                     multipleTracker.push(guessLowerCase[i])
                     yellowTracker.push(guessLowerCase[i])
                 } else {
-                    arr.push(colors[2])
+                    //check if word has three same letter
+                    let count = 0
+                    for (let j = 0; j < 5; j++) {
+                        if (guessLowerCase[i] === answerArr[j]) {
+                            count++
+                        }
+                    }
+                    if (count === 3) {
+                        arr.push(colors[1])
+                    } else {
+                        arr.push(colors[2])
+                    }
                 }
                 !yellowLetters.includes(answerArr[i]) &&
                     yellow.push(guessLowerCase[i])
-            } else {
+            } else if (!guessArr[i].includes(answerArr)) {
                 arr.push(colors[2])
                 !grayLetters.includes(answerArr[i]) && // make background black
                     gray.push(guessLowerCase[i])
@@ -186,9 +205,13 @@ function GameWindow({ level }) {
             const joined = guessWord.join('').toLowerCase()
             if (words.includes(joined)) {
                 if (joined === answer) {
+                    setShowConfetti(true)
                     checkIndex(guessWord)
-                    setScore(score + 1)
-                    setResult(true) // show you win message
+                    if (enterDisable) {
+                        setScore(score + 1)
+                        setEnterDisable(false)
+                        setResult(true) // show you win message
+                    }
                 } else {
                     checkIndex(guessWord)
                     setRowPointer(pointer)
@@ -199,6 +222,21 @@ function GameWindow({ level }) {
         } else {
             setDisappearModal(setShort)
         }
+    }
+
+    const addScore = () => {
+        if (window.location.pathname.includes('/easy')) {
+            // easy collection
+            addEasyScoreHandler(params.name, score)
+        } else {
+            // hard collection
+            addHardScoreHandler(params.name, score)
+        }
+    }
+
+    const stopPlaying = () => {
+        addScore()
+        navigate('/')
     }
 
     const handleEnter = () => {
@@ -223,22 +261,20 @@ function GameWindow({ level }) {
                     const joined = sixthGuess.join('').toLowerCase()
                     if (words.includes(joined)) {
                         if (joined === answer) {
+                            setShowConfetti(true)
                             checkIndex(sixthGuess)
-                            setResult(true)
+                            if (enterDisable) {
+                                setScore(score + 1)
+                                setEnterDisable(false)
+                                setResult(true) // show you win message
+                            }
                         } else {
                             checkIndex(sixthGuess)
-                            //add score to firebase
-                            if (window.location.pathname.includes('/easy')) {
-                                // easy collection
-                                addEasyScoreHandler(params.name, score)
-                            } else {
-                                // hard collection
-                                addHardScoreHandler(params.name, score)
-                            }
+                            addScore()
                             setLose(true)
                         }
                     } else {
-                        setDisappearModal(setNotAWord)
+                        setLose(true)
                     }
                 } else {
                     setDisappearModal(setShort)
@@ -250,6 +286,8 @@ function GameWindow({ level }) {
     }
 
     const handlePlayAgain = () => {
+        setShowConfetti(false)
+        setEnterDisable(true)
         setFirstRowColors([])
         setSecondRowColors([])
         setThirdRowColors([])
@@ -275,6 +313,7 @@ function GameWindow({ level }) {
 
     return (
         <>
+            {showConfetti ? <Confetti width={width} height={height} /> : null}
             <p className="scoreContainer">SCORE: {score}</p>
             <div className="guessContainer">
                 <div
@@ -690,13 +729,38 @@ function GameWindow({ level }) {
                 <div className="modal_container">
                     <div className="modal_content">
                         <div className="modal_header">
-                            <button onClick={() => setResult(false)}>x</button>
+                            <button
+                                style={{ margin: '0' }}
+                                onClick={() => setResult(false)}
+                            >
+                                x
+                            </button>
                         </div>
                         <div className="modal_body">
-                            <h2>You win!</h2>
+                            <h2>You win!🎉</h2>
                         </div>
                         <div className="modal_footer">
-                            <h3 onClick={handlePlayAgain}>Continue</h3>
+                            <h3
+                                style={{
+                                    fontWeight: 'bold',
+                                    color: 'lightgreen',
+                                }}
+                                onClick={handlePlayAgain}
+                            >
+                                Continue
+                            </h3>
+                            <h4
+                                style={{
+                                    cursor: 'pointer',
+                                    color: 'tomato',
+                                    fontWeight: 'lighter',
+                                    margin: '0',
+                                    paddingBottom: '10px',
+                                }}
+                                onClick={stopPlaying}
+                            >
+                                Stop
+                            </h4>
                         </div>
                     </div>
                 </div>

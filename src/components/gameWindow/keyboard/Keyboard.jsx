@@ -2,37 +2,6 @@ import React, { useEffect } from 'react'
 import { useState, useRef } from 'react'
 import './keyboard.css'
 
-const useKey = (key, cb) => {
-    const callbackRef = useRef(cb)
-
-    useEffect(() => {
-        callbackRef.current = cb
-    })
-    useEffect(() => {
-        const handle = (event) => {
-            event.code === key && callbackRef.current(event)
-        }
-
-        document.addEventListener('keypress', handle)
-        return () => document.removeEventListener('keypress', handle)
-    }, [key])
-}
-const useKeyDel = (key, cb) => {
-    const callbackRef = useRef(cb)
-
-    useEffect(() => {
-        callbackRef.current = cb
-    })
-    useEffect(() => {
-        const handle = (event) => {
-            event.code === key && callbackRef.current(event)
-        }
-
-        document.addEventListener('keydown', handle)
-        return () => document.removeEventListener('keydown', handle)
-    }, [key])
-}
-
 function Keyboard({
     set,
     first,
@@ -61,6 +30,37 @@ function Keyboard({
     const [yellowLetters, setYellowLetters] = useState([])
     const [grayLetters, setGrayLetters] = useState([])
 
+    const useKey = (key, cb) => {
+        const callbackRef = useRef(cb)
+
+        useEffect(() => {
+            callbackRef.current = cb
+        })
+        useEffect(() => {
+            const handle = (event) => {
+                event.code === key && callbackRef.current(event)
+            }
+
+            document.addEventListener('keypress', handle)
+            return () => document.removeEventListener('keypress', handle)
+        }, [key])
+    }
+    const useKeyDel = (key, cb) => {
+        const callbackRef = useRef(cb)
+
+        useEffect(() => {
+            callbackRef.current = cb
+        })
+        useEffect(() => {
+            const handle = (event) => {
+                event.code === key && callbackRef.current(event)
+            }
+
+            document.addEventListener('keydown', handle)
+            return () => document.removeEventListener('keydown', handle)
+        }, [key])
+    }
+
     const backSpace = (row, setRow) => {
         setRow(row.slice(0, row.length - 1))
     }
@@ -83,6 +83,8 @@ function Keyboard({
                 break
             case 'sixth':
                 backSpace(sixth, setSixth)
+                break
+            default:
                 break
         }
     }

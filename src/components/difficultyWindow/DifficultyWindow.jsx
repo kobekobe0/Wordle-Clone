@@ -55,7 +55,7 @@ function DifficultyWindow() {
                     type="text"
                     placeholder="Enter your name"
                     onChange={(e) => setName(e.target.value)}
-                    maxLength={8}
+                    maxLength={6}
                 />
             </div>
             {disabler ? null : (
@@ -68,7 +68,7 @@ function DifficultyWindow() {
                     <Link
                         className="difficulty_element"
                         style={{
-                            backgroundColor: 'rgb(41, 255, 255)',
+                            backgroundColor: 'rgb(71, 218, 255)',
                             color: 'white',
                         }}
                         to={`/easy/${urlName}`}
@@ -90,7 +90,7 @@ function DifficultyWindow() {
             <br />
 
             <div className="leaderboards">
-                <h2>Leadeboard</h2>
+                <h2>Leadeboard🏆</h2>
                 <h3 style={{ fontWeight: 'lighter' }}>Hard Mode</h3>
                 <div className="hardLeaders">
                     {hard !== null &&
