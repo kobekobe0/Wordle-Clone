@@ -273,7 +273,7 @@ function GameWindow({ level }) {
                             setLose(true)
                         }
                     } else {
-                        setLose(true)
+                        setDisappearModal(setNotAWord)
                     }
                 } else {
                     setDisappearModal(setShort)
