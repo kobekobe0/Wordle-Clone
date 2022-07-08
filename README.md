@@ -17,3 +17,10 @@ Easy Mode:
 Hard Mode:
  - In this mode, random word that will be genrated is any of the possible 5-letter english words.
  - Word pool size is: [12,000+]
+
+
+
+
+BUGS TO FIX
+-If user guessed a letter in the right index but there's another 
+same letter next to it, in keyboord, that letter must still be highlighted with yellow rather than green
